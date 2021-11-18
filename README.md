@@ -4,24 +4,28 @@
 nvme_exporter is written based on the python prometheus client ([https://github.com/prometheus/client_python](https://github.com/prometheus/client_python)) and the NVMe CLI tool ([https://github.com/linux-nvme/nvme-cli](https://github.com/linux-nvme/nvme-cli)).
 
 ## Dependencies
+- `pip`
+- `gcc`
+- `git`
+- `make`
+- `build-essential`
 - `python3.6`
 - `nvme-cli` 
 - `python prometheous-client`
 
 ## Installation 
 ```
+apt install pip gcc build-essential 
+
 git clone git@github.com:yongseokoh/nvme_exporter.git
 cd nvme_exporter
 
 # Install prometheus-client
-pip install requirements.txt
+pip install prometheus-client
 
-# Install nvme-cli tool
-git submodule init
-git submodule update
-cd nvme-cli
-make
-make install
+# Build nvme-cli tool
+git submodule init && git submodule update
+cd nvme-cli && make install
 ```
 
 ### Usage
@@ -41,7 +45,9 @@ optional arguments:
 
 ### Example
 ```
-sudo python nvme_exporter.py -p 9900 -u 10
+python nvme_exporter.py -p 9900 -u 10 
+# or
+tmux new -d 'python3 ./nvme_exporter.py -p 9900 -u 10' 
 ```
 
 ## Grafana Sample
